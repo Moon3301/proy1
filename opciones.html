@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="scripts.js">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+
+<style>
+
+/* Set height of body and the document to 100% */
+
+#Agregar {background-color: white;}
+#Revision {background-color: green;}
+#Historial {background-color: white;}
+#About {background-color: orange;}
+
+/* Style tab links */
+
+</style>
+</head>
+
+<body>
+
+  <button class="tablink" onclick="openPage('Agregar', this, 'red')" id="defaultOpen">Agregar</button>
+  <button class="tablink" onclick="openPage('Revision', this, 'green')" >Revision</button>
+  <button class="tablink" onclick="openPage('Historial', this, 'blue')">Historial</button>
+  <button class="tablink" onclick="openPage('About', this, 'orange')">About</button>
+  
+  <div id="Agregar" class="tabcontent">
+    <br>
+    <br>
+    <br>
+    <h2 style="text-align: center;">REGISTRAR ACTIVIDAD</h2>
+    <br>
+    <div class="container" style="margin: 0 auto;">
+      <div class="form">
+        <label for="usr">CATEGORIA </label>
+          <select class="form-control form-control col-11">
+            <option>Tecnologia</option>
+            <option>Tareas</option>
+            <option>Habitos</option>
+            <option>Tecnologia</option>
+          </select>
+          <br>
+
+          <label for="usr">NOMBRE ACTIVIDAD: </label>
+          <input type="text" class="form-control" id="usr">
+          <br>
+
+          <label for="usr">FECHA: </label>
+          <input class="form-control" type="text" placeholder="" readonly>
+          <br>
+          
+          <label for="usr">TIEMPO INVERTIDO: </label>
+          <input type="range" class="form-control-range">
+          <br>
+          <label for="usr">PRIORIDAD: </label>
+          <div class="row ">
+            <div class="form-check-inline" >
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" id="baja" onclick="SeleccionPrioridad">Baja
+              </label>
+            </div>
+            <div class="form-check-inline" >
+              <label class="form-check-label" >
+                <input type="checkbox" class="form-check-input" id="media" onclick="SeleccionPrioridad">Media
+              </label>
+            </div>
+            <div class="form-check-inline" >
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" id="alta" onclick="SeleccionPrioridad">Alta
+              </label>
+            </div>
+          </div>
+          <br>
+          
+
+          <div class="row">
+
+            <button type="button" class="btn btn-outline-primary ">Eliminar</button>
+            
+            <button type="button" class="btn btn-outline-primary ">Guardar</button>
+
+          </div>
+          
+
+      </div>
+
+
+    </div>
+    
+  </div>
+  
+  <div id="Revision" class="tabcontent">
+   
+  </div>
+  
+  <div id="Historial" class="tabcontent">
+
+    <div class="row container col-5">
+      <canvas id="myChart" width="400" height="400"></canvas>
+
+
+    </div>
+
+    <div class="container col-7">
+      <p>Actividades realizadas esta semana: </p>
+
+
+    </div>
+
+   
+    
+
+    
+  </div>
+  
+  <div id="About" class="tabcontent">
+    <h3>About</h3>
+    <p>Who we are and what we do.</p>
+  </div>
+
+
+
+
+
+
+<script>
+    
+  function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+
+  document.getElementById("defaultOpen").click();
+
+</script>
+
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: '# of Votes',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  
+
+
+
+
+
+
+const $box1 = document.querySelector('baja');
+$box1 = false;
+
+$box1.addEventListener("click",() =>{
+    box2 = false;
+    box3 = false;
+
+
+})
+
+    function SeleccionPrioridad(){
+
+    const $box1 = document.querySelector('baja');
+    var box2 = document.getElementById('media');
+    var box3 = document.getElementById('alta');
+
+    
+
+    $box1 = false;
+    box2  = false;
+    box3 =  false;
+      
+    if ($box1.che){
+      box2 = false;
+      box3 = false;
+
+    }else if(box2.click() == true){
+
+      box1 = false;
+      box3 = false;
+
+    }else if (box3.click() == true)
+
+      box2 = false;
+      box1 = false;
+
+
+
+
+    }
+
+   
+
+</script>
+
+
+   
+</body>
+</html> 
